@@ -1,0 +1,24 @@
+@import 'layout.css';
+@import 'styles.css';
+@import 'home.css';
+@import 'product.css';
+@import 'cart.css';
+@import 'profile.css';
+
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Yantramanav, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
