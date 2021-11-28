@@ -113,91 +113,94 @@ const CreateProduct = () => {
 
     if(!auth.user) return null;
     return (
-        <div className="container">
+        <div className="">
             <Head>
                 <title>Manage product</title>
             </Head>
 
             <Layout>
-                <div className="manage_product">
-                    <form className="w-100 px-2" onSubmit={handleSubmit}> 
-                        <div className="row">
-                            <div className="col-md-6">
-                                <label htmlFor="name">Name</label>
-                                <input type="text" name="name" value={name} 
-                                    placeholder="Name" className="d-block w-100 mb-4 p-2"
-                                    onChange={handleChange}/>
-                                
-                                <div className="row mx-0 mb-4">
-                                    <div className="col-sm-6 px-0 pr-4">
-                                        <label htmlFor="price">Price</label>
-                                        <input type="number" name="price" value={price} 
-                                            placeholder="Price" className="d-block w-100 p-2"
-                                            onChange={handleChange}/>
+                <div className="container">
+        
+                    <div className="manage_product">
+                        <form className="w-100 px-2" onSubmit={handleSubmit}> 
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <label htmlFor="name">Name</label>
+                                    <input type="text" name="name" value={name} 
+                                        placeholder="Name" className="d-block w-100 mb-4 p-2"
+                                        onChange={handleChange}/>
+
+                                    <div className="row mx-0 mb-4">
+                                        <div className="col-sm-6 px-0 pr-4">
+                                            <label htmlFor="price">Price</label>
+                                            <input type="number" name="price" value={price} 
+                                                placeholder="Price" className="d-block w-100 p-2"
+                                                onChange={handleChange}/>
+                                        </div>
+                                        <div className="col-sm-6 px-0 pl-4">
+                                            <label htmlFor="inStock">InStock</label>
+                                            <input type="number" name="inStock" value={inStock} 
+                                                placeholder="InStock" className="d-block w-100 p-2"
+                                                onChange={handleChange}/>
+                                        </div>
                                     </div>
-                                    <div className="col-sm-6 px-0 pl-4">
-                                        <label htmlFor="inStock">InStock</label>
-                                        <input type="number" name="inStock" value={inStock} 
-                                            placeholder="InStock" className="d-block w-100 p-2"
-                                            onChange={handleChange}/>
+
+                                    <label htmlFor="description">Description</label>
+                                    <textarea name="description" id="description" cols="30" rows="7"
+                                        value={description} placeholder="Description" 
+                                        onChange={handleChange} className="d-block mb-4 w-100 p-2" />
+
+                                    <label htmlFor="category">Category</label>
+                                    <div className="input-group-prepend px-0 my-2">
+                                        <select name="category" id="category" value={category}
+                                            className="custom-select text-capitalize"
+                                            onChange={handleChange}>
+                                                <option value="all">Select category</option>
+                                                {
+                                                    categories.map(item => (
+                                                        <option key={item._id} value={item._id}>
+                                                            {item.name}
+                                                        </option>
+                                                    ))
+                                                }
+                                        </select>
                                     </div>
                                 </div>
 
-                                <label htmlFor="description">Description</label>
-                                <textarea name="description" id="description" cols="30" rows="7"
-                                    value={description} placeholder="Description" 
-                                    onChange={handleChange} className="d-block mb-4 w-100 p-2" />
+                                <div className="col-md-6 my-4">
+                                    <div className="input-group mb-3">
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text">Upload</span>
+                                        </div>
+                                        <div className="custom-file border rounded">
+                                            <input type="file" className="custom-file-input" 
+                                                onChange={handleUpload} multiple accept="image/*"/>
+                                        </div>
+                                    </div>
 
-                                <label htmlFor="category">Category</label>
-                                <div className="input-group-prepend px-0 my-2">
-                                    <select name="category" id="category" value={category}
-                                        className="custom-select text-capitalize"
-                                        onChange={handleChange}>
-                                            <option value="all">Select category</option>
-                                            {
-                                                categories.map(item => (
-                                                    <option key={item._id} value={item._id}>
-                                                        {item.name}
-                                                    </option>
-                                                ))
-                                            }
-                                    </select>
+                                    <div className="row img-up">
+                                        {
+                                            images.map((img, index) => (
+                                                <div key={index} className="file-img my-1">
+                                                    <img src={img.url ? img.url : URL.createObjectURL(img)}
+                                                    alt="" className="img-thumbnail rounded" />
+
+                                                    <span onClick={() => deleteImage(index)}>X</span>
+                                                </div>                                    
+                                            ))
+                                        }
+                                    </div>
                                 </div>
+
                             </div>
-                            
-                            <div className="col-md-6 my-4">
-                                <div className="input-group mb-3">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text">Upload</span>
-                                    </div>
-                                    <div className="custom-file border rounded">
-                                        <input type="file" className="custom-file-input" 
-                                            onChange={handleUpload} multiple accept="image/*"/>
-                                    </div>
-                                </div>
-                            
-                                <div className="row img-up">
-                                    {
-                                        images.map((img, index) => (
-                                            <div key={index} className="file-img my-1">
-                                                <img src={img.url ? img.url : URL.createObjectURL(img)}
-                                                alt="" className="img-thumbnail rounded" />
-            
-                                                <span onClick={() => deleteImage(index)}>X</span>
-                                            </div>                                    
-                                        ))
-                                    }
-                                </div>
+
+                            <div className="text-center">
+                                <button type="submit" className="btn btn-dark my-2 px-4">
+                                    { onEdit ? 'Update' : 'Create'}
+                                </button>
                             </div>
-
-                        </div>
-
-                        <div className="text-center">
-                            <button type="submit" className="btn btn-dark my-2 px-4">
-                                { onEdit ? 'Update' : 'Create'}
-                            </button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </Layout>
         </div>
