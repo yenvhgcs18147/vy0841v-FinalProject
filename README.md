@@ -10,5 +10,9 @@ Staff:
 Admin: 
     + email: admin@gmail.com 
     + pass: 123456789
+    
+Account Paypal
+    + sb-rgwsn7461633@personal.example.com
+    + Chocolate
 
 
