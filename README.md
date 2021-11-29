@@ -13,6 +13,6 @@ Admin:
     
 Account Paypal
     + sb-rgwsn7461633@personal.example.com
-    + Chocolate
+    + password: Chocolate
 
 
